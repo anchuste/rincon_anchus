@@ -6696,6 +6696,7 @@ a.close.disabled {
   display: none;
   float: left;
   width: 100%;
+  
   margin-right: -100%;
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
@@ -6706,6 +6707,12 @@ a.close.disabled {
   .carousel-item {
     transition: none;
   }
+}
+
+.anchus{
+  width: 100%;
+  height: 250px;
+  object-fit: cover !important;
 }
 
 .carousel-item.active,
