@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoriaController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', [CategoriaController::class, 'getAllCategorias']);
+
+
+//Route::get('/', 'YourControllerName@functionName')
+
+/*
 Route::get('/', function () {
     return view('welcome');
 });
+*/
+
