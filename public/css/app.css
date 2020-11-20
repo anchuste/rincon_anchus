@@ -1,4 +1,5 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Nunito);
+@charset "UTF-8";
 
 /*!
  * Bootstrap v4.5.3 (https://getbootstrap.com/)
@@ -6707,12 +6708,6 @@ a.close.disabled {
   .carousel-item {
     transition: none;
   }
-}
-
-.anchus{
-  width: 100%;
-  height: 250px;
-  object-fit: cover !important;
 }
 
 .carousel-item.active,

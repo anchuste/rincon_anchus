@@ -1,0 +1,19 @@
+.img_categoria {
+    float: left;
+    width:  100%;
+    height: 8em;
+    object-fit: cover;
+}
+
+.custom_carousel{
+    width: 100%;
+    height: 250px;
+    object-fit: cover !important;
+  }
+
+body {
+    overflow-x: hidden;
+  }
+
+
+  
