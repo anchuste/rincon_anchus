@@ -16,4 +16,12 @@ body {
   }
 
 
+.card-signin .card-img-left {
+   width: 45%;
+   /* Link to your background image using in the property below! */
+   background: scroll center url("../../resources/images/super_mario_register.jpg");
+   background-size: cover;
+}
+
+
   
