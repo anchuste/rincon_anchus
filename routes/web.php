@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\LoginController;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,25 +19,14 @@ use App\Http\Controllers\LoginController;
 
 Route::get('/', [CategoriaController::class, 'getAllCategorias']);
 
-Route::get('/login', function () {
-    return view('login');
+Route::get('/login/{from}', function ($from) {
+    return view('login')->with('from', $from);
 });
 
-Route::get('/welcome', [CategoriaController::class, 'getAllCategorias']);
+// Con la acción -> name del final, definimos un nombre de ruta que nos servirá para llamarle desde otros puntos (controladores).
+Route::get('/welcome', [CategoriaController::class, 'getAllCategorias'])->name('welcome');
+
+Route::post('iniciarSesion/{from}', [LoginController::class, 'checkUserInitSession']);
 
 
-Route::post('iniciarSesion', [LoginController::class, 'checkUserInitSession']);
-
-
-
-
-//Route::get('/', 'YourControllerName@functionName')
-
-/*
-Route::get('/', function () {
-    return view('welcome');
-});
-*/
-
-//Route::get('/problems/{problem-id}/edit', 'AdminController@editProblem');
 

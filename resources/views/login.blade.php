@@ -54,7 +54,8 @@
           </div>
           <div class="card-body">
             <h5 class="card-title text-center">Iniciar sesión</h5>
-            <form class="form-signin" action="{{url('iniciarSesion')}}" method="post">
+            <form class="form-signin" action="{{ url('iniciarSesion/' .$from )}}" method="post">
+            
             @csrf
               <div class="form-label-group">
                 <input type="email" id="inputEmail" class="form-control" placeholder="Email" name="email" required>

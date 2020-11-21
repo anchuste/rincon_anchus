@@ -37,7 +37,7 @@
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/login') }}">Iniciar sesión</a>
+                    <a class="nav-link" href="{{ url('/login/welcome') }}">Iniciar sesión</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/register') }}">Registrar</a>
