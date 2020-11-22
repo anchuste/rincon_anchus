@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProductoController;
 
 
 
@@ -33,3 +34,9 @@ Route::post('iniciarSesion/{from}', [LoginController::class, 'checkUserInitSessi
 /*Route::get('/login/{from}', [LoginController::class, 'index'])->name('login');*/
 
 Route::get('/login/{from}', [LoginController::class, 'index'])->name('login');
+
+Route::get('/productosCategoria/{idCategoria}', [ProductoController::class, 'index']);
+
+
+
+
