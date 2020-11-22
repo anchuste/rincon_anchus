@@ -22,7 +22,7 @@
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        
+
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
@@ -36,18 +36,24 @@
                 </li>
             </ul>
             <ul class="navbar-nav">
+                <?php
+                session_start();
+                if(isset($_SESSION["userSession"])) {
+                    echo '<li class="nav-item"> <h6 style="color:white; margin-top: 0.7rem;">'.$_SESSION["userSession"].'</h6></li>';
+                }
+                ?>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/login/welcome') }}">Iniciar sesión</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/register') }}">Registrar</a>
                 </li>
+                
             </ul>
         </div>
     </nav>
 
-    
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" >
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -73,12 +79,13 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
-    
+
     <div class="row" style="margin-top: 0.65em;">
-    @foreach($categorias as $categoria)
-        <div class="col-12 col-md-4 col-sm-12 col-xs-12" >
+        @foreach($categorias as $categoria)
+        <div class="col-12 col-md-4 col-sm-12 col-xs-12">
             <div class="card">
-                <img class="img_categoria" src="../resources/images/{{ $categoria->imagen_path ?? '' }}" alt="Card image cap">
+                <img class="img_categoria" src="../resources/images/{{ $categoria->imagen_path ?? '' }}"
+                    alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title">{{ $categoria->nombre ?? '' }}</h5>
                     <p class="card-text">{{ $categoria->descripcion ?? '' }}</p>
@@ -86,7 +93,7 @@
                 </div>
             </div>
         </div>
-    @endforeach
+        @endforeach
     </div>
 </body>
 

@@ -14,7 +14,7 @@ class CategoriaController extends Controller
         $categorias = \App\Models\categoria::all();
 
         Log::info($categorias);
-
+        
         // Retorno la vista y le paso las categorías.
         return view('welcome',compact('categorias'));
 

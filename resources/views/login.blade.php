@@ -39,6 +39,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/login') }}">Iniciar sesión</a>
                 </li>
+                
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/register') }}">Registrar</a>
                 </li>
@@ -63,9 +64,16 @@
               <div class="form-label-group" style="margin-top: 1.65em;">
                 <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required>
               </div>
+              <?php
+                if(!isset($_SESSION)) { session_start(); } 
+                if(isset($_SESSION["errorLogin"])) {
+                    echo '<h6 style="color:red;">'.$_SESSION["errorLogin"].'</h6>';
+                }
+                ?>
               <div style="margin-top: 3em">
                 <button class="btn btn-lg btn-dark btn-block text-uppercase btn_iniciar_sesion" type="submit">Iniciar sesión</button>
               </div>
+              
               <a class="d-block text-center mt-2 small" href="#">Registrar</a>
             </form>
           </div>

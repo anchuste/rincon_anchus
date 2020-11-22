@@ -22,19 +22,34 @@ class LoginController extends Controller
         ->where('password', $password_user)
         ->get();
 
-        Log::info($clienteRecuperado);
-
+        // No se ha recuperado el cliente, se traslada el mensaje al usuario
         if ($clienteRecuperado->isEmpty()){
-            return view('login',compact('categorias'));
+            if(!isset($_SESSION)) { session_start(); } 
+            $_SESSION["errorLogin"]="Error al iniciar sesión, usuario o contraseña incorrecta";
+            return redirect(route('login', $from));
         }
-        else{
-            // Existe el cliente
-            if ($from == 'welcome'){
-                return redirect(route('welcome'));
-            }
 
+        $clienteRecuperadoAsArray = json_decode($clienteRecuperado, true);
         
+        if (empty($clienteRecuperadoAsArray) || !isset($clienteRecuperadoAsArray[0]['nombre'])) {
+            if(!isset($_SESSION)) { session_start(); } 
+            $_SESSION["errorLogin"]="Error al iniciar sesión, usuario o contraseña incorrecta";
+            return redirect(route('login/'. $from));
         }
 
+        // Esta parte solo la hace si se ha recuperado un cliente:
+        if(!isset($_SESSION)) { session_start(); } 
+        $_SESSION["userSession"]=$clienteRecuperadoAsArray[0]['nombre'];
+        Log::info($_SESSION["userSession"]);
+
+        // Existe el cliente y venimos desde la página welcome (la inicial)
+        if ($from == 'welcome'){
+            return redirect(route('welcome'));
+        }
+    }
+
+    public function index($from)
+    {
+        return view('login')->with('from', $from);
     }
 }

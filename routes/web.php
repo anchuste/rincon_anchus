@@ -19,14 +19,17 @@ use App\Http\Controllers\LoginController;
 
 Route::get('/', [CategoriaController::class, 'getAllCategorias']);
 
+/*
 Route::get('/login/{from}', function ($from) {
     return view('login')->with('from', $from);
-});
+})->name('login');*/
+
 
 // Con la acción -> name del final, definimos un nombre de ruta que nos servirá para llamarle desde otros puntos (controladores).
 Route::get('/welcome', [CategoriaController::class, 'getAllCategorias'])->name('welcome');
 
 Route::post('iniciarSesion/{from}', [LoginController::class, 'checkUserInitSession']);
 
+/*Route::get('/login/{from}', [LoginController::class, 'index'])->name('login');*/
 
-
+Route::get('/login/{from}', [LoginController::class, 'index'])->name('login');
