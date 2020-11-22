@@ -35,7 +35,11 @@ Route::post('iniciarSesion/{from}', [LoginController::class, 'checkUserInitSessi
 
 Route::get('/login/{from}', [LoginController::class, 'index'])->name('login');
 
-Route::get('/productosCategoria/{idCategoria}', [ProductoController::class, 'index']);
+Route::get('/productoscategoria/{idCategoria}', [ProductoController::class, 'index']);
+
+Route::get('/detalleproducto/{idProducto}', [ProductoController::class, 'getProduct']);
+
+
 
 
 

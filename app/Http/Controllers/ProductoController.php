@@ -11,8 +11,11 @@ class ProductoController extends Controller
     public function index($idCategoria)
     {
         Log::info($idCategoria);
-        return view('productosCategoria')->with('productosRecuperadosAsArray', $this->getProductosByIdCategoria($idCategoria));
-        
+
+        $productos = $this->getProductosByIdCategoria($idCategoria);
+
+        return view('products', compact('productos'));
+
     }
 
     public function getProductosByIdCategoria($idCategoria){
@@ -20,14 +23,20 @@ class ProductoController extends Controller
         $productosRecuperados = \App\Models\Producto::where('id_categoria', $idCategoria)
         ->get();
 
-        $productosRecuperadosAsArray = json_decode($productosRecuperados, true);
+        Log::info($productosRecuperados);
+        return $productosRecuperados;
+        
+    }
 
-        Log::info($productosRecuperadosAsArray);
-        return $productosRecuperadosAsArray;
-        
-        
-        /*
-        ->where('password', $password_user)
-        ->get();*/
+    public function getProduct($idProducto){
+
+        $producto = \App\Models\Producto::where('id_producto', $idProducto)
+        ->get();
+
+        Log::info($producto);
+
+        $productoAsArray = json_decode($producto, true);
+
+        return view('detalleproducto', compact('productoAsArray'));
     }
 }

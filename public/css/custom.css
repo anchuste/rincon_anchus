@@ -5,6 +5,10 @@
     object-fit: cover;
 }
 
+.img_producto{
+  object-fit: cover;
+}
+
 .custom_carousel{
     width: 100%;
     height: 250px;
@@ -21,6 +25,12 @@ body {
    /* Link to your background image using in the property below! */
    background: scroll center url("../../resources/images/super_mario_register.jpg");
    background-size: cover;
+}
+
+.card-signin .card-img-producto {
+  width: 45%;
+  /*background: scroll center url(../../resources/images/super_mario_register.jpg);*/
+  background-size: cover;
 }
 
 
