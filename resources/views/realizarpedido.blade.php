@@ -22,7 +22,7 @@
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        
+
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
@@ -39,33 +39,41 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/login') }}">Iniciar sesión</a>
                 </li>
-                
+
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/register') }}">Registrar</a>
                 </li>
             </ul>
         </div>
     </nav>
-    <div class="container">
-    <div class="row">
-      <div class="col-lg-10 col-xl-9 mx-auto">
-        <div class="card card-signin flex-row my-5" style="height: 24em;">
-          <div class="card-img-producto d-none d-md-flex" style="background: scroll center url(../../resources/images/switch_dragon_quest.jpg); background-repeat: no-repeat;
-                background-size: cover;">                                         
-          </div>
-          <div class="card-body">
-            <h4 class="card-title text-center">COMPRAR</h4>
+
+    <form class="form-signin" action="" method="post">
+    <div class="container" style="margin-top: 3em">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 mx-auto">
+                <h3 class="card-title text-center">INFORMACIÓN PARA REALIZAR PEDIDO</h3>
+            </div>
             <hr>
-            <h3 class="card-title text-right">{{ $productoAsArray[0]['nombre'] ?? '' }}</h3>
-            <h1 class="text-right" style="font-size: 4.25em">{{ $productoAsArray[0]['precio'] ?? '' }} €</h1>
-            <p class="card-text">{{ $productoAsArray[0]['descripcion'] ?? '' }}</p>
-            <div style="margin-top: 3em">
-                <!--<button class="btn btn-lg btn-dark btn-block text-uppercase btn_iniciar_sesion" type="submit">Añadir al carrito</button>-->
-                <button onclick="location.href='{{ url('agregarCarrito/' . $productoAsArray[0]['id_producto'] )}} '" type="button"> Añadir al carrito</button>
-              </div>
-          </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 mx-auto ">
+                <input type="text" id="inputNombre" class="form-control custom_text_pedido" placeholder="Nombre" name="nombre" required>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 mx-auto ">
+                <input type="text" id="inputApellido" class="form-control custom_text_pedido" placeholder="Apellido" name="apellido" required>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 mx-auto">
+                <input type="email" id="inputEmail" class="form-control custom_text_pedido" placeholder="Email" name="email" required>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 mx-auto" >
+                <input type="text" id="inputTelefono" class="form-control custom_text_pedido" placeholder="Telefono" name="telefono" required>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 mx-auto">
+                <input type="text" id="inputDireccion" class="form-control custom_text_pedido" placeholder="Direccion" name="direccion" required>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 mx-auto finaliza_pedido_btn">
+            <button type="submit" class="btn btn-secondary btn-lg">Finalizar pedido</button>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+    </form>
+
 </html>
