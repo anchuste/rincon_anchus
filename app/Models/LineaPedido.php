@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Cliente extends Model
+class LineaPedido extends Model
 {
     use HasFactory;
 
-    protected $table = 'cliente';
+    protected $table = 'linea_pedido';
     public $timestamps = false;
 }

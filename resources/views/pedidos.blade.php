@@ -22,7 +22,7 @@
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        
+
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
@@ -39,45 +39,46 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/login') }}">Iniciar sesión</a>
                 </li>
-                
+
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/register') }}">Registrar</a>
                 </li>
             </ul>
         </div>
     </nav>
-    <div class="container">
-    <div class="row">
-      <div class="col-lg-10 col-xl-9 mx-auto">
-        <div class="card card-signin flex-row my-5" style="height: 24em;">
-          <div class="card-img-left d-none d-md-flex">
-             <!-- Background image for card set in CSS! -->
-          </div>
-          <div class="card-body">
-            <h5 class="card-title text-center">Iniciar sesión</h5>
-            <form class="form-signin" action="{{ url('iniciarSesion/' .$from )}}" method="post">
-            @csrf
-              <div class="form-label-group">
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email" name="email" required>
-              </div>
-              <div class="form-label-group" style="margin-top: 1.65em;">
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required>
-              </div>
-              <?php
-                if(!isset($_SESSION)) { session_start(); } 
-                if(isset($_SESSION["errorLogin"])) {
-                    echo '<h6 style="color:red;">'.$_SESSION["errorLogin"].'</h6>';
-                }
-                ?>
-              <div style="margin-top: 3em">
-                <button class="btn btn-lg btn-dark btn-block text-uppercase btn_iniciar_sesion" type="submit">Iniciar sesión</button>
-              </div>
-              
-              <a class="d-block text-center mt-2 small" href="#">Registrar</a>
-            </form>
-          </div>
+    <div class="container" style="margin-top: 3em">
+        <?php
+            if(!isset($_SESSION)) { session_start(); } 
+            if(isset($_SESSION["userSession"]) && $_SESSION["userSession"]=="admin") {
+        ?>
+        @foreach($productosCarro as $producto)
+        <hr>
+        <div class="row" style="heigth: 4em; margin-top: 0.15em">
+            <div class="col-12 col-sm-12 col-md-3 col-lg-3 mx-auto" style="text-align:center">
+                <img height="75%" width="50%" src="{{'../resources/images/' . $producto[0]['imagen_path'] }}" alt="" />
+            </div>
+            <div class="col-12 col-sm-12 col-md-3 col-lg-3 mx-auto " style="margin-top: 2em">
+                <h4 class="card-title text-center"> {{ $producto[0]['nombre'] ?? '' }}</h4>
+            </div>
+            <div class="col-12 col-sm-12 col-md-2 col-lg-2 mx-auto" style="margin-top: 2em">
+                <h4 class="card-title text-center"> 1 </h4>
+            </div>
+            <div class="col-12 col-sm-12 col-md-2 col-lg-2 mx-auto" style="margin-top: 2em">
+                <h3 class="card-title text-center"> {{ $producto[0]['precio'] ?? '' }} € </h3>
+            </div>
         </div>
-      </div>
+        @endforeach
+        <?php
+        }
+        ?>
+        <?php
+            if(!isset($_SESSION)) { session_start(); } 
+            if(!isset($_SESSION["userSession"]) || (isset($_SESSION["userSession"]) && $_SESSION["userSession"]!="admin")) {
+        ?>
+        <h1 class="card-title text-center"> Zona restringida para Administradores.</h1>
+        <h2 class="card-title text-center" style="margin-top: 1.0em"> ¡Es información confidencial! <h2>
+        <?php
+            }
+        ?>
     </div>
-  </div>
 </html>

@@ -40,6 +40,7 @@ class LoginController extends Controller
         // Esta parte solo la hace si se ha recuperado un cliente:
         if(!isset($_SESSION)) { session_start(); } 
         $_SESSION["userSession"]=$clienteRecuperadoAsArray[0]['nombre'];
+        $_SESSION["idSession"]=$clienteRecuperadoAsArray[0]['id_cliente'];
         Log::info($_SESSION["userSession"]);
 
         // Existe el cliente y venimos desde la página welcome (la inicial)
@@ -52,4 +53,14 @@ class LoginController extends Controller
     {
         return view('login')->with('from', $from);
     }
+
+    public function salirSesion()
+    {
+        if(!isset($_SESSION)) { session_start(); } 
+        unset($_SESSION['idSession']);
+        unset($_SESSION['userSession']);
+        return redirect(route('welcome'));
+    }
+
+    
 }

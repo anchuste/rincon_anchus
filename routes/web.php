@@ -28,8 +28,6 @@ Route::get('/welcome', [CategoriaController::class, 'getAllCategorias'])->name('
 
 Route::post('iniciarSesion/{from}', [LoginController::class, 'checkUserInitSession']);
 
-/*Route::get('/login/{from}', [LoginController::class, 'index'])->name('login');*/
-
 Route::get('/login/{from}', [LoginController::class, 'index'])->name('login');
 
 Route::get('/productoscategoria/{idCategoria}', [ProductoController::class, 'index']);
@@ -41,6 +39,10 @@ Route::get('agregarCarrito/{idProducto}', [CarritoController::class, 'agregarPro
 Route::get('/carrito', [CarritoController::class, 'index'])->name('carrito');
 
 Route::get('/realizarPedido', [PedidoController::class, 'index'])->name('realizarpedido');
+
+Route::post('/procesarPedido', [PedidoController::class, 'procesarPedido'])->name('procesarpedido');
+
+Route::get('/salirSesion', [LoginController::class, 'salirSesion'])->name('salirsesion');
 
 /*
 Route::get('carrito', function () {

@@ -47,7 +47,8 @@
         </div>
     </nav>
 
-    <form class="form-signin" action="" method="post">
+    <form class="form-signin" action="{{ url('procesarPedido/')}}" method="post">
+    @csrf
     <div class="container" style="margin-top: 3em">
         <div class="row">
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 mx-auto">
@@ -55,19 +56,19 @@
             </div>
             <hr>
             <div class="col-12 col-sm-12 col-md-6 col-lg-6 mx-auto ">
-                <input type="text" id="inputNombre" class="form-control custom_text_pedido" placeholder="Nombre" name="nombre" required>
+                <input type="text" id="inputNombre" class="form-control custom_text_pedido" placeholder="nombre" name="nombre" value="{{ $clienteRecuperado[0]['nombre'] ?? '' }}" required>
             </div>
             <div class="col-12 col-sm-12 col-md-6 col-lg-6 mx-auto ">
-                <input type="text" id="inputApellido" class="form-control custom_text_pedido" placeholder="Apellido" name="apellido" required>
+                <input type="text" id="inputApellido" class="form-control custom_text_pedido" placeholder="apellidos" name="apellidos" value="{{ $clienteRecuperado[0]['apellidos'] ?? '' }}" required>
             </div>
             <div class="col-12 col-sm-12 col-md-6 col-lg-6 mx-auto">
-                <input type="email" id="inputEmail" class="form-control custom_text_pedido" placeholder="Email" name="email" required>
+                <input type="email" id="inputEmail" class="form-control custom_text_pedido" placeholder="email" name="email" value="{{ $clienteRecuperado[0]['mail'] ?? '' }}" required>
             </div>
             <div class="col-12 col-sm-12 col-md-6 col-lg-6 mx-auto" >
-                <input type="text" id="inputTelefono" class="form-control custom_text_pedido" placeholder="Telefono" name="telefono" required>
+                <input type="text" id="inputTelefono" class="form-control custom_text_pedido" placeholder="telefono" name="telefono" value="{{ $clienteRecuperado[0]['telefono'] ?? '' }}" required>
             </div>
             <div class="col-12 col-sm-12 col-md-6 col-lg-6 mx-auto">
-                <input type="text" id="inputDireccion" class="form-control custom_text_pedido" placeholder="Direccion" name="direccion" required>
+                <input type="text" id="inputDireccion" class="form-control custom_text_pedido" placeholder="direccion" name="direccion" value="{{ $clienteRecuperado[0]['direccion'] ?? '' }}" required>
             </div>
             <div class="col-12 col-sm-12 col-md-6 col-lg-6 mx-auto finaliza_pedido_btn">
             <button type="submit" class="btn btn-secondary btn-lg">Finalizar pedido</button>

@@ -17,7 +17,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">La tiendecitasss de Anchus</a>
+        <a class="navbar-brand" href="#">La tiendecita de Anchus</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -47,6 +47,10 @@
         </div>
     </nav>
     <div class="container" style="margin-top: 3em">
+        <?php
+            if(!isset($_SESSION)) { session_start(); } 
+            if(isset($_SESSION["cart"])) {
+        ?>
         @foreach($productosCarro as $producto)
         <hr>
         <div class="row" style="heigth: 4em; margin-top: 0.15em">
@@ -64,13 +68,44 @@
             </div>
         </div>
         @endforeach
+        <?php
+        }
+        ?>
+        <?php
+            if(!isset($_SESSION)) { session_start(); } 
+            if(!isset($_SESSION["cart"])) {
+        ?>
+        <h1 class="card-title text-center"> El carrito de la compra está vacío.</h1>
+        <h2 class="card-title text-center" style="margin-top: 1.0em"> ¡Anímate y empieza a llenarlo! <h2>
+        <?php
+            }
+        ?>
     </div>
+    <?php
+            if(!isset($_SESSION)) { session_start(); } 
+            if(!isset($_SESSION["cart"])) {
+        ?>
     <div class="row" style="heigth: 4em; margin-top: 0.15em">
-        <div class="col-12 col-sm-12 col-md-6 col-lg-6 mx-auto" style="text-align: right">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 mx-auto" style="text-align: center; margin-top: 1.0em">
+            <button type="button" onclick="location.href='{{ url('welcome/')}} '"class="btn btn-secondary btn-lg">Empezar a comprar</button>
+        </div>
+    </div>
+    <?php
+            }
+        ?>
+    <?php
+            if(!isset($_SESSION)) { session_start(); } 
+            if(isset($_SESSION["cart"])) {
+        ?>
+    <div class="row" style="heigth: 4em; margin-top: 0.15em">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 mx-auto" style="text-align: right; margin-top: 1.0em">
+            <button type="button" onclick="location.href='{{ url('welcome/')}} '"class="btn btn-secondary btn-lg">Seguir comprando</button>
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 mx-auto" style="text-align: left; margin-top: 1.0em">
             <button type="button" onclick="location.href='{{ url('realizarPedido/')}} '"class="btn btn-secondary btn-lg">Realizar pedido</button>
         </div>
-        <div class="col-12 col-sm-12 col-md-6 col-lg-6 mx-auto">
-            <button type="button" onclick="location.href='{{ url('welcome/')}} '" class="btn btn-secondary btn-lg">Seguir comprando</button>
-        </div>
     </div>
+    <?php
+            }
+        ?>
 </html>

@@ -22,7 +22,7 @@
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        
+
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
@@ -39,45 +39,25 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/login') }}">Iniciar sesión</a>
                 </li>
-                
+
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/register') }}">Registrar</a>
                 </li>
             </ul>
         </div>
     </nav>
-    <div class="container">
-    <div class="row">
-      <div class="col-lg-10 col-xl-9 mx-auto">
-        <div class="card card-signin flex-row my-5" style="height: 24em;">
-          <div class="card-img-left d-none d-md-flex">
-             <!-- Background image for card set in CSS! -->
-          </div>
-          <div class="card-body">
-            <h5 class="card-title text-center">Iniciar sesión</h5>
-            <form class="form-signin" action="{{ url('iniciarSesion/' .$from )}}" method="post">
-            @csrf
-              <div class="form-label-group">
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email" name="email" required>
-              </div>
-              <div class="form-label-group" style="margin-top: 1.65em;">
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required>
-              </div>
-              <?php
-                if(!isset($_SESSION)) { session_start(); } 
-                if(isset($_SESSION["errorLogin"])) {
-                    echo '<h6 style="color:red;">'.$_SESSION["errorLogin"].'</h6>';
-                }
-                ?>
-              <div style="margin-top: 3em">
-                <button class="btn btn-lg btn-dark btn-block text-uppercase btn_iniciar_sesion" type="submit">Iniciar sesión</button>
-              </div>
-              
-              <a class="d-block text-center mt-2 small" href="#">Registrar</a>
-            </form>
-          </div>
-        </div>
-      </div>
+    <div class="container" style="margin-top: 3em">
+        <h1 class="card-title text-center"> ¡Enhorabuena, el pedido se ha realizado correctamente!</h1>
+        <h2 class="card-title text-center"> ¡Muchas gracias por confiar en nososotros! <h2>
+        <hr>
+        <h4 class="card-title text-center"> En breve recibirá un correo electrónico con la factura del pedido <h4>
     </div>
-  </div>
+    <div class="row" style="heigth: 4em; margin-top: 0.15em">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 mx-auto" style="text-align: right">
+            <button type="button" onclick="location.href='{{ url('realizarPedido/')}} '"class="btn btn-secondary btn-lg">Ir a mis pedidos</button>
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 mx-auto">
+            <button type="button" onclick="location.href='{{ url('welcome/')}} '" class="btn btn-secondary btn-lg">Seguir comprando</button>
+        </div>
+    </div>
 </html>

@@ -37,20 +37,19 @@ class CarritoController extends Controller
 
         //Siempre que entramos en la página del carro hacemos una petición por cada idproducto a la base de datos y
         //el resultado lo metemos en un array para tener la info manipulable en la vista.
-        foreach ($_SESSION['cart'] as $value) 
-        {
-            $productoRecuperado = \App\Models\Producto::where('id_producto', $value)
-            ->get();
-            array_push($productsArray, json_decode($productoRecuperado, true));
+
+        if(isset($_SESSION["cart"])){
+            Log::info("Tiene carrito");
+            foreach ($_SESSION['cart'] as $value) 
+            {
+                $productoRecuperado = \App\Models\Producto::where('id_producto', $value)
+                ->get();
+                array_push($productsArray, json_decode($productoRecuperado, true));
+            }
+        }else{
+            Log::info("No Tiene carrito");
         }
-
-        /*
-        foreach ($productsArray as $value) 
-        {
-            Log::info($value[0]['nombre']);
-        }*/
             
-
         return view('carrito')->with('productosCarro', $productsArray);
     }
 }

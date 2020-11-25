@@ -17,7 +17,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">La tiendecita de Anchus</a>
+        <a class="navbar-brand" href="{{ url('/welcome') }}">La tiendecita de Anchus</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -37,18 +37,50 @@
             </ul>
             <ul class="navbar-nav">
                 <?php
-                session_start();
+                if(!isset($_SESSION)) { session_start(); } 
                 if(isset($_SESSION["userSession"])) {
-                    echo '<li class="nav-item"> <h6 style="color:white; margin-top: 0.7rem;">'.$_SESSION["userSession"].'</h6></li>';
+                    echo '<li class="nav-item"> <h6 style="color:white; margin-top: 0.7rem;"> ¡Bienvenido '.$_SESSION["userSession"].'!</h6></li>';
                 }
+                ?>
+
+
+                <?php
+                if(!isset($_SESSION)) { session_start(); } 
+                if(!isset($_SESSION["userSession"])) {
                 ?>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/login/welcome') }}">Iniciar sesión</a>
                 </li>
+                <?php
+                }
+                ?>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/carrito') }}">Carrito</a>
+                </li>
+
+                <!--
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/register') }}">Registrar</a>
-                </li>
-                
+                </li>-->
+
+                <?php
+                if(!isset($_SESSION)) { session_start(); } 
+                if(isset($_SESSION["userSession"])) {
+                    ?>
+                   <li class="nav-item"> <a class="nav-link" href="{{ url('/salirSesion') }}"> Mis pedidos </a></li>
+                   <?php
+                }
+                ?>
+
+                <?php
+                if(!isset($_SESSION)) { session_start(); } 
+                if(isset($_SESSION["userSession"])) {
+                    ?>
+                   <li class="nav-item"> <a class="nav-link" href="{{ url('/salirSesion') }}"> Salir </a></li>
+                   <?php
+                }
+                ?>
             </ul>
         </div>
     </nav>
