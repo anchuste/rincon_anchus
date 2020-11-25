@@ -16,52 +16,84 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">La tiendecita de Anchus</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="{{ url('/welcome') }}">La tiendecita de Anchus</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        
+
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ url('/welcome') }}">Inicio <span class="sr-only">(current)</span></a>
-                </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Categorías</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Productos</a>
+                    <a class="nav-link" href="{{ url('/welcome') }}">Categorías</a>
                 </li>
             </ul>
             <ul class="navbar-nav">
+                <?php
+                if(!isset($_SESSION)) { session_start(); } 
+                if(isset($_SESSION["userSession"])) {
+                    echo '<li class="nav-item"> <h6 style="color:white; margin-top: 0.7rem;"> ¡Bienvenido '.$_SESSION["userSession"].'!</h6></li>';
+                }
+                ?>
+
+
+                <?php
+                if(!isset($_SESSION)) { session_start(); } 
+                if(!isset($_SESSION["userSession"])) {
+                ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/login') }}">Iniciar sesión</a>
+                    <a class="nav-link" href="{{ url('/login/welcome') }}">Iniciar sesión</a>
                 </li>
-                
+                <?php
+                }
+                ?>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/carrito') }}">Carrito</a>
+                </li>
+
+                <!--
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/register') }}">Registrar</a>
-                </li>
+                </li>-->
+
+                <?php
+                if(!isset($_SESSION)) { session_start(); } 
+                if(isset($_SESSION["userSession"])) {
+                    ?>
+                   <li class="nav-item"> <a class="nav-link"> Mis pedidos </a></li>
+                   <?php
+                }
+                ?>
+
+                <?php
+                if(!isset($_SESSION)) { session_start(); } 
+                if(isset($_SESSION["userSession"])) {
+                    ?>
+                   <li class="nav-item"> <a class="nav-link" href="{{ url('/salirSesion') }}"> Salir </a></li>
+                   <?php
+                }
+                ?>
             </ul>
         </div>
     </nav>
+             
     <div class="container">
     <div class="row">
       <div class="col-lg-10 col-xl-9 mx-auto">
         <div class="card card-signin flex-row my-5" style="height: 24em;">
-          <div class="card-img-producto d-none d-md-flex" style="background: scroll center url(../../resources/images/switch_dragon_quest.jpg); background-repeat: no-repeat;
-                background-size: cover;">                                         
-          </div>
+        <?php
+        echo '<div class="card-img-producto d-none d-md-flex" style="background-size: contain; background-repeat: no-repeat; background-image: url(../../resources/images/'?><?php echo $productoAsArray[0]['imagen_path'] ?><?php echo ')"> </div>'
+            ?>   
           <div class="card-body">
             <h4 class="card-title text-center">COMPRAR</h4>
             <hr>
             <h3 class="card-title text-right">{{ $productoAsArray[0]['nombre'] ?? '' }}</h3>
             <h1 class="text-right" style="font-size: 4.25em">{{ $productoAsArray[0]['precio'] ?? '' }} €</h1>
-            <p class="card-text">{{ $productoAsArray[0]['descripcion'] ?? '' }}</p>
             <div style="margin-top: 3em">
                 <!--<button class="btn btn-lg btn-dark btn-block text-uppercase btn_iniciar_sesion" type="submit">Añadir al carrito</button>-->
-                <button onclick="location.href='{{ url('agregarCarrito/' . $productoAsArray[0]['id_producto'] )}} '" type="button"> Añadir al carrito</button>
+                <button onclick="location.href='{{ url('agregarCarrito/' . $productoAsArray[0]['id_producto'] )}} '" type="button" class="btn btn-secondary btn-lg"> Añadir al carrito</button>
               </div>
           </div>
         </div>

@@ -16,8 +16,8 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">La tiendecita de Anchus</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="{{ url('/welcome') }}">La tiendecita de Anchus</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -25,30 +25,56 @@
 
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ url('/welcome') }}">Inicio <span class="sr-only">(current)</span></a>
-                </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Categorías</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Productos</a>
+                    <a class="nav-link" href="{{ url('/welcome') }}">Categorías</a>
                 </li>
             </ul>
             <ul class="navbar-nav">
                 <?php
-                session_start();
+                if(!isset($_SESSION)) { session_start(); } 
                 if(isset($_SESSION["userSession"])) {
-                    echo '<li class="nav-item"> <h6 style="color:white; margin-top: 0.7rem;">'.$_SESSION["userSession"].'</h6></li>';
+                    echo '<li class="nav-item"> <h6 style="color:white; margin-top: 0.7rem;"> ¡Bienvenido '.$_SESSION["userSession"].'!</h6></li>';
                 }
+                ?>
+
+
+                <?php
+                if(!isset($_SESSION)) { session_start(); } 
+                if(!isset($_SESSION["userSession"])) {
                 ?>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/login/welcome') }}">Iniciar sesión</a>
                 </li>
+                <?php
+                }
+                ?>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/carrito') }}">Carrito</a>
+                </li>
+
+                <!--
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/register') }}">Registrar</a>
-                </li>
-                
+                </li>-->
+
+                <?php
+                if(!isset($_SESSION)) { session_start(); } 
+                if(isset($_SESSION["userSession"])) {
+                    ?>
+                   <li class="nav-item"> <a class="nav-link"> Mis pedidos </a></li>
+                   <?php
+                }
+                ?>
+
+                <?php
+                if(!isset($_SESSION)) { session_start(); } 
+                if(isset($_SESSION["userSession"])) {
+                    ?>
+                   <li class="nav-item"> <a class="nav-link" href="{{ url('/salirSesion') }}"> Salir </a></li>
+                   <?php
+                }
+                ?>
             </ul>
         </div>
     </nav>
@@ -57,9 +83,9 @@
 
     <div class="row" style="margin-top: 0.65em;">
         @foreach($productos as $producto)
-        <div class="col-12 col-md-2 col-sm-12 col-xs-12">
-            <div class="card" style="width: 15em">
-                <img class="img_producto" src="../../resources/images/{{ $producto->imagen_path ?? '' }}"
+        <div class="col-12 col-md-2 col-sm-12 col-xs-12" style="margin-bottom: 1em;">
+            <div class="card" style="width: 16em; height: 25em">
+                <img class="img_producto" style="margin-left: 1em; width: 10em;height: 16em" src="../../resources/images/{{ $producto->imagen_path ?? '' }}"
                     alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title">{{ $producto->nombre ?? '' }}</h5>

@@ -16,8 +16,8 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">La tiendecita de Anchus</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="{{ url('/welcome') }}">La tiendecita de Anchus</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -25,32 +25,79 @@
 
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ url('/welcome') }}">Inicio <span class="sr-only">(current)</span></a>
-                </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Categorías</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Productos</a>
+                    <a class="nav-link" href="{{ url('/welcome') }}">Categorías</a>
                 </li>
             </ul>
             <ul class="navbar-nav">
+                <?php
+                if(!isset($_SESSION)) { session_start(); } 
+                if(isset($_SESSION["userSession"])) {
+                    echo '<li class="nav-item"> <h6 style="color:white; margin-top: 0.7rem;"> ¡Bienvenido '.$_SESSION["userSession"].'!</h6></li>';
+                }
+                ?>
+
+
+                <?php
+                if(!isset($_SESSION)) { session_start(); } 
+                if(!isset($_SESSION["userSession"])) {
+                ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/login') }}">Iniciar sesión</a>
+                    <a class="nav-link" href="{{ url('/login/welcome') }}">Iniciar sesión</a>
                 </li>
+                <?php
+                }
+                ?>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/register') }}">Registrar</a>
+                    <a class="nav-link" href="{{ url('/carrito') }}">Carrito</a>
                 </li>
+
+                <!--
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/register') }}">Registrar</a>
+                </li>-->
+
+                <?php
+                if(!isset($_SESSION)) { session_start(); } 
+                if(isset($_SESSION["userSession"])) {
+                    ?>
+                   <li class="nav-item"> <a class="nav-link"> Mis pedidos </a></li>
+                   <?php
+                }
+                ?>
+
+                <?php
+                if(!isset($_SESSION)) { session_start(); } 
+                if(isset($_SESSION["userSession"])) {
+                    ?>
+                   <li class="nav-item"> <a class="nav-link" href="{{ url('/salirSesion') }}"> Salir </a></li>
+                   <?php
+                }
+                ?>
             </ul>
         </div>
     </nav>
     <div class="container" style="margin-top: 3em">
-        <?php
+    <?php
             if(!isset($_SESSION)) { session_start(); } 
             if(isset($_SESSION["cart"])) {
         ?>
+    <div class="row" style="heigth: 4em; margin-top: 0.15em">
+            <div class="col-12 col-sm-12 col-md-2 col-lg-2 mx-auto" style="margin-top: 2em">
+                <h4 class="card-title text-center"> Producto </h4>
+            </div>
+            <div class="col-12 col-sm-12 col-md-2 col-lg-2 mx-auto" style="margin-top: 2em">
+                <h4 class="card-title text-center"> Nombre</h4>
+            </div>
+            <div class="col-12 col-sm-12 col-md-2 col-lg-2 mx-auto" style="margin-top: 2em">
+                <h4 class="card-title text-center"> Unidades </h4>
+            </div>
+            <div class="col-12 col-sm-12 col-md-2 col-lg-2 mx-auto" style="margin-top: 2em">
+                <h4 class="card-title text-center"> Precio </h4>
+            </div>
+    </div>
+        
         @foreach($productosCarro as $producto)
         <hr>
         <div class="row" style="heigth: 4em; margin-top: 0.15em">

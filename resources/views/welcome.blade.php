@@ -25,14 +25,8 @@
 
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ url('/welcome') }}">Inicio <span class="sr-only">(current)</span></a>
-                </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Categorías</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Productos</a>
+                    <a class="nav-link" href="{{ url('/welcome') }}">Categorías</a>
                 </li>
             </ul>
             <ul class="navbar-nav">
@@ -68,7 +62,7 @@
                 if(!isset($_SESSION)) { session_start(); } 
                 if(isset($_SESSION["userSession"])) {
                     ?>
-                   <li class="nav-item"> <a class="nav-link" href="{{ url('/salirSesion') }}"> Mis pedidos </a></li>
+                   <li class="nav-item"> <a class="nav-link"> Mis pedidos </a></li>
                    <?php
                 }
                 ?>
@@ -116,12 +110,13 @@
         @foreach($categorias as $categoria)
         <div class="col-12 col-md-4 col-sm-12 col-xs-12">
             <div class="card">
-                <img class="img_categoria" src="../resources/images/{{ $categoria->imagen_path ?? '' }}"
+                <img class="img_categoria" style="height: 15em" src="../resources/images/{{ $categoria->imagen_path ?? '' }}"
                     alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">{{ $categoria->nombre ?? '' }}</h5>
-                    <p class="card-text">{{ $categoria->descripcion ?? '' }}</p>
-                    <a href="{{ url('productoscategoria/' .$categoria->id_categoria )}}" class="btn btn-primary stretched-link">Go somewhere</a>
+                <div class="card-body row">
+                    <div class="col-12 col-sm-6 col-md-12 col-lg-12" style="text-align: center">
+                        <h5 class="card-title">{{ $categoria->descripcion ?? '' }}</h5>
+                    </div>
+                    <a href="{{ url('productoscategoria/' .$categoria->id_categoria )}}" class="stretched-link"></a>
                 </div>
             </div>
         </div>
